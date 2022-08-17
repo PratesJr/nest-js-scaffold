@@ -1,8 +1,8 @@
 {
   "name": "nest-js-scaffold",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "API scaffold using NestJs framework",
+  "author": "mpratesjunior@gmail.com",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

@@ -1,11 +1,28 @@
 
 # Description
 
-<!-- will be updated -->
+This Project is a NestJs TypeScript scaffold to all my personal projects.
+
+## What is included
+<!-- to be updated -->
+
+## Pending  Features
+
+- Commitzen
+- Lint Staged
+- Husky hooks (commit lint, test coverage)
+- ESLINT configuration
+- TypeORM
+- Auth Method
+- Database Container
 
 ## System Requirements
 
-<!-- will be updated -->
+- _Node_: version >= 16.16
+- _NPM_: version >= 8.11
+- _NestJs_: >= 9.0.0
+- _Docker_: version >= 20.10
+- _Docker Compose_: version >= 1.29
 
 ## Installation
 
@@ -41,7 +58,7 @@ $ npm run test:cov
 
 ## Stay in touch
 
-- Author - [Marcelo Prates](mpratesjunior@gmail.com)
+- Author - [Marcelo Prates] - mpratesjunior@gmail.com
 
 ## License
 
