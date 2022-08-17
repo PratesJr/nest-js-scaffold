@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "ms-azuretools.vscode-docker",
+    "dbaeumer.vscode-eslint",
+    "waderyan.gitblame",
+    "eamodio.gitlens",
+    "firsttris.vscode-jest-runner",
+    "bierner.markdown-mermaid",
+    "Gruntfuggly.todo-tree"
+  ]
+}
