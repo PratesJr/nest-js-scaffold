@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo  "Running Eslint\n"
+echo  "Running Eslint"
 echo "..."
 npm run lint
 echo "Lint succeeded\n"
@@ -9,9 +9,9 @@ echo "Lint succeeded\n"
 echo "Linting staged files"
 echo "..."
 npx lint-staged --allow-empty
-echo "Staged files are ok"
+echo "Staged files are ok\n"
 
 echo "Running tests"
 echo "..."
 npm test
-echo "Tests succeeded"
+echo "Tests succeeded\n"
