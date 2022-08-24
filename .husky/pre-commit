@@ -9,7 +9,7 @@ echo "Lint succeeded\n"
 echo "..."
 
 echo "Linting staged files\n"
-npx lint-staged && git add .
+npx lint-staged --allow-empty
 echo "Staged files are ok"
 
 echo "..."
