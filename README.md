@@ -4,17 +4,17 @@
 This Project is a NestJs TypeScript scaffold to all my personal projects.
 
 ## What is included
-<!-- to be updated -->
 
-## Pending  Features
-
-- Commitzen
 - Lint Staged
 - Husky hooks (commit lint, test coverage)
 - ESLINT configuration
-- TypeORM
-- Auth Method
 - Database Container
+
+## Pending  Features
+
+- TypeORM
+- OAuth Strategy
+- Swagger documentation
 
 ## System Requirements
 
@@ -28,6 +28,16 @@ This Project is a NestJs TypeScript scaffold to all my personal projects.
 
 ```bash
 npm install
+```
+
+```bash
+touch .env && cp .env.example .env
+```
+
+- After this commands you'll need to add the database values on you env file, then run the following command
+
+```bash
+docker-compose up -d
 ```
 
 ## Running the app
