@@ -1,0 +1,16 @@
+version: '3'
+services:
+  database_dev_pg:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DATABASE=${DB_NAME}
+    ports:
+      - '${DB_PORT}:5432'
+    volumes:
+      - database_dev_pg:/var/lib/postgresql/data
+volumes:
+  database_dev_pg:
+    driver: local
