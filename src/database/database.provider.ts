@@ -1,28 +1,38 @@
+import { Provider } from '@nestjs/common';
 import { Op } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-export const DatabaseProvider = [
-  {
-    provide: 'SEQUELIZE',
-    useFactory: async () => {
-      const sequelize = new Sequelize({
+export const DatabaseProvider: Provider = {
+  provide: 'SEQUELIZE',
+  useFactory: async () => {
+    const db: Sequelize = new Sequelize(
+      process.env.DB_NAME,
+      process.env.DB_USER,
+      process.env.DB_PASSWORD,
+      {
         dialect: 'postgres',
         host: process.env.DB_HOST,
-        port: Number(process.env.DB_PORT),
-        username: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-        operatorsAliases: {
-          [Op.like]: '$like',
-          [Op.and]: '$and',
-          [Op.gt]: '$gt',
-          [Op.gte]: '$gte',
-          [Op.iLike]: '$ilike',
+        port: parseInt(process.env.DB_PORT || '5432', 10),
+        logging: false,
+        benchmark: false,
+        retry: {
+          max: 3,
         },
-      });
-      sequelize.addModels([]);
+        operatorsAliases: {
+          $like: Op.like,
+          $iLike: Op.iLike,
+          $not: Op.not,
+          $in: Op.in,
+          $notIn: Op.notIn,
+          $lowerOrEqualThen: Op.lte,
+          $lowerThen: Op.lt,
+        },
+      },
+    );
+    db.addModels([]);
 
-      return sequelize;
-    },
+    return db;
   },
-];
+};
