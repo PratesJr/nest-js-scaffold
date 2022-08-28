@@ -9,10 +9,10 @@ This Project is a NestJs TypeScript scaffold to all my personal projects.
 - Husky hooks (commit lint, test coverage)
 - ESLINT configuration
 - Database Container
+- Sequelize ORM
 
 ## Pending  Features
 
-- TypeORM
 - OAuth Strategy
 - Swagger documentation
 
