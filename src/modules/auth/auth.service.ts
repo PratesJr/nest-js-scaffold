@@ -3,15 +3,12 @@ import { AuthService } from './auth.interface';
 
 @Injectable()
 export class AuthServiceImpl implements AuthService {
-  // googleLogin(req) {
-  //   if (!req.user) {
-  //     return 'No user from google';
-  //   }
-  //   return {
-  //     message: 'User information from google',
-  //     user: req.user,
-  //   };
-  // }
+  googleLogin(req: any): Promise<any> {
+    if (!req.body.user) {
+      return null;
+    }
+    return undefined;
+  }
 
   generateToken(): void {
     return;
