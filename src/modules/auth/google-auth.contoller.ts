@@ -1,6 +1,8 @@
 import {
   Controller,
   Get,
+  HttpCode,
+  HttpStatus,
   Inject,
   Req,
   Request,
@@ -24,9 +26,8 @@ export class GoogleAuthController {
 
   @Get('redirect')
   @UseGuards(AuthGuard('google'))
-  redirect(@Req() _req, @Res() _res) {
-    return this._authService.googleLogin(_req).then((result) => {
-      return result;
-    });
+  @HttpCode(200)
+  async redirect(@Req() _req): Promise<any> {
+    return this._authService.googleLogin(_req);
   }
 }

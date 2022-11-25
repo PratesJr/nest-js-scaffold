@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
+import { UserInfoDto } from 'src/types/auth-user.dto';
 import { AuthService } from './auth.interface';
+import { isNil } from 'lodash';
 
 @Injectable()
 export class AuthServiceImpl implements AuthService {
-  googleLogin(req: any): Promise<any> {
-    if (!req.body.user) {
+  googleLogin(user: UserInfoDto): UserInfoDto {
+    if (isNil(user)) {
       return null;
     }
-    return undefined;
+    return user;
   }
 
   generateToken(): void {

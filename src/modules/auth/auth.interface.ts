@@ -1,5 +1,7 @@
+import { UserInfoDto } from 'src/types/auth-user.dto';
+
 export interface AuthService {
   generateToken(): void;
   refreshToken(): void;
-  googleLogin(req: Request): Promise<any>;
+  googleLogin(req: UserInfoDto): UserInfoDto;
 }
