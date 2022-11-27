@@ -7,6 +7,7 @@ import * as dotenv from 'dotenv';
 import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { GoogleStrategy } from './google.strategy';
+import { HttpModule } from '@nestjs/axios';
 dotenv.config();
 
 @Module({
@@ -18,6 +19,10 @@ dotenv.config();
           expiresIn: process.env.JWT_EXPIRATION,
         },
       }),
+    }),
+    HttpModule.register({
+      timeout: 5000,
+      maxRedirects: 5,
     }),
     ConfigModule,
     PassportModule,

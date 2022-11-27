@@ -24,6 +24,7 @@
     "migration:create": "npx sequelize-cli migration:generate --name"
   },
   "dependencies": {
+    "@nestjs/axios": "^1.0.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
@@ -31,6 +32,7 @@
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/sequelize": "^9.0.0",
+    "axios": "^1.2.0",
     "dotenv": "^16.0.3",
     "luxon": "^3.1.0",
     "passport": "^0.6.0",
