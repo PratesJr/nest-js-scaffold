@@ -5,7 +5,7 @@ import { isNil } from 'lodash';
 
 @Injectable()
 export class AuthServiceImpl implements AuthService {
-  googleLogin(user: UserInfoDto): UserInfoDto {
+  authenticate(user: UserInfoDto): UserInfoDto {
     if (isNil(user)) {
       return null;
     }
@@ -16,6 +16,10 @@ export class AuthServiceImpl implements AuthService {
     return;
   }
   refreshToken(): void {
+    return;
+  }
+
+  logout(): any {
     return;
   }
 }

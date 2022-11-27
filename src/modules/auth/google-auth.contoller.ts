@@ -28,6 +28,6 @@ export class GoogleAuthController {
   @UseGuards(AuthGuard('google'))
   @HttpCode(200)
   async redirect(@Req() _req): Promise<any> {
-    return this._authService.googleLogin(_req);
+    return this._authService.authenticate(_req.user);
   }
 }
