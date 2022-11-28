@@ -11,6 +11,7 @@ import { JwtAuthGuard } from 'src/guard/jwt.guard';
 import { AuthService } from './auth.interface';
 
 @Controller('auth/google')
+//TODO: refresh token route and method
 export class GoogleAuthController {
   // eslint-disable-next-line no-empty-function, prettier/prettier
   constructor(@Inject('AuthService') private _authService: AuthService) { }
@@ -25,8 +26,6 @@ export class GoogleAuthController {
   @UseGuards(GoogleOAuthGuard)
   @HttpCode(200)
   redirect(@Req() _req): any {
-    return {
-      accessToken: this._authService.authenticate(_req.user),
-    };
+    return this._authService.authenticate(_req.user);
   }
 }

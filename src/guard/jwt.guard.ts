@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   ExecutionContext,
   Injectable,
   UnauthorizedException,
@@ -10,7 +9,6 @@ import { DateTime } from 'luxon';
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   canActivate(context: ExecutionContext) {
-    console.log('aqui qundo', context);
     return super.canActivate(context);
   }
 
@@ -22,8 +20,8 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       throw err;
     }
     if (
-      DateTime.fromMillis(Number(user.sub)).toUTC().toISO() ===
-      DateTime.now().toUTC().toISO()
+      DateTime.now().toUTC().toISO() >=
+      DateTime.fromMillis(Number(user.exp)).toUTC().toISO()
     ) {
       throw new UnauthorizedException();
     }
