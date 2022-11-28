@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { UserInfoDto } from 'src/types/auth-user.dto';
 
 export interface AuthService {
-  generateToken(): void;
+  generateToken(userInfo: UserInfoDto, now: number): string;
   refreshToken(): void;
-  authenticate(req: UserInfoDto): UserInfoDto;
+  authenticate(req: UserInfoDto): string;
   logout(token: string): Observable<AxiosResponse<any>>;
 }

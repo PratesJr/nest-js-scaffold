@@ -6,6 +6,9 @@ import { HttpService } from '@nestjs/axios';
 import { map, Observable } from 'rxjs';
 import { AxiosResponse } from 'axios';
 import * as dotenv from 'dotenv';
+import { JwtService } from '@nestjs/jwt';
+import { JwtPayload } from 'src/types/jwt-payload.dto';
+import { DateTime } from 'luxon';
 dotenv.config();
 @Injectable()
 export class AuthServiceImpl implements AuthService {
@@ -13,18 +16,39 @@ export class AuthServiceImpl implements AuthService {
   constructor(
     // eslint-disable-next-line no-unused-vars
     private readonly httpService: HttpService,
+    // eslint-disable-next-line no-unused-vars
+    private jwtService: JwtService,
   ) {
     this.route = process.env.REVOKE_GOOGLE_TOKEN_URI;
   }
-  authenticate(user: UserInfoDto): UserInfoDto {
+  authenticate(user: UserInfoDto): string {
     if (isNil(user)) {
       return null;
     }
-    return user;
+    return this.generateToken(user, DateTime.utc().toMillis());
   }
 
-  generateToken(): void {
-    return;
+  generateToken(userInfo: UserInfoDto, now: number): string {
+    const payload: JwtPayload = {
+      sub: '',
+      exp: DateTime.fromMillis(now)
+        .plus({
+          seconds: Number(process.env.JWT_EXPIRATION),
+        })
+        .toUTC()
+        .toMillis(),
+      iat: now,
+      expiresAt: DateTime.fromMillis(now)
+        .plus({
+          seconds: Number(process.env.JWT_EXPIRATION),
+        })
+        .toUTC()
+        .toISO()
+        .toString(),
+      username: userInfo.email,
+      fullName: `${userInfo.firstName} ${userInfo.lastName}`,
+    };
+    return this.jwtService.sign(payload);
   }
   refreshToken(): void {
     return;

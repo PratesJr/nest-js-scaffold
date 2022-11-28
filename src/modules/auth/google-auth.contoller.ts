@@ -2,14 +2,10 @@ import {
   Controller,
   Get,
   HttpCode,
-  HttpStatus,
   Inject,
   Req,
-  Request,
-  Res,
   UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { GoogleOAuthGuard } from 'src/guard/google.oauth.guard';
 import { AuthService } from './auth.interface';
 
@@ -20,14 +16,16 @@ export class GoogleAuthController {
 
   @Get()
   @UseGuards(GoogleOAuthGuard)
-  async auth(): Promise<void> {
+  auth(): void {
     return;
   }
 
   @Get('redirect')
   @UseGuards(GoogleOAuthGuard)
   @HttpCode(200)
-  async redirect(@Req() _req): Promise<any> {
-    return this._authService.authenticate(_req.user);
+  redirect(@Req() _req): any {
+    return {
+      accessToken: this._authService.authenticate(_req.user),
+    };
   }
 }

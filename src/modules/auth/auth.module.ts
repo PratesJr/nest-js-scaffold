@@ -15,9 +15,6 @@ dotenv.config();
     JwtModule.registerAsync({
       useFactory: async () => ({
         secret: process.env.JWT_SECRET,
-        signOptions: {
-          expiresIn: process.env.JWT_EXPIRATION,
-        },
       }),
     }),
     HttpModule.register({
