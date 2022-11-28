@@ -6,8 +6,9 @@ import { GoogleAuthController } from './google-auth.contoller';
 import * as dotenv from 'dotenv';
 import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
-import { GoogleStrategy } from './google.strategy';
+import { GoogleStrategy } from '../../strategy/google.strategy';
 import { HttpModule } from '@nestjs/axios';
+import { JwtStrategy } from 'src/strategy/jwt.strategy';
 dotenv.config();
 
 @Module({
@@ -28,6 +29,7 @@ dotenv.config();
   providers: [
     { useClass: AuthServiceImpl, provide: 'AuthService' },
     GoogleStrategy,
+    JwtStrategy,
   ],
   exports: [],
 })
