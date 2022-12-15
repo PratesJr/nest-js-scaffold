@@ -21,7 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky install",
     "db:migrate": "npx sequelize-cli db:migrate",
-    "migration:create": "npx sequelize-cli migration:generate --name"
+    "migration:create": "npx sequelize-cli migration:generate --name",
+    "migration": "npx sequelize-cli db:migrate"
   },
   "dependencies": {
     "@nestjs/axios": "^1.0.0",
