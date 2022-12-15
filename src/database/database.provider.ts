@@ -2,7 +2,7 @@ import { Provider } from '@nestjs/common';
 import { Op } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import * as dotenv from 'dotenv';
-import { User } from './entities/user.entity';
+import { User } from './entity/user.entity';
 dotenv.config();
 
 export const DatabaseProvider: Provider = {
