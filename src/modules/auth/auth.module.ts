@@ -9,6 +9,7 @@ import { PassportModule } from '@nestjs/passport';
 import { GoogleStrategy } from '../../strategy/google.strategy';
 import { HttpModule } from '@nestjs/axios';
 import { JwtStrategy } from 'src/strategy/jwt.strategy';
+import { RefreshTokenStrategy } from 'src/strategy/refresh-token.strategy';
 dotenv.config();
 
 @Module({
@@ -30,6 +31,7 @@ dotenv.config();
     { useClass: AuthServiceImpl, provide: 'AuthService' },
     GoogleStrategy,
     JwtStrategy,
+    RefreshTokenStrategy,
   ],
   exports: [],
 })
