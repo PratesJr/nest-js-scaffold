@@ -6,8 +6,10 @@ import { GoogleAuthController } from './google-auth.contoller';
 import * as dotenv from 'dotenv';
 import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
-import { GoogleStrategy } from './google.strategy';
+import { GoogleStrategy } from '../../strategy/google.strategy';
 import { HttpModule } from '@nestjs/axios';
+import { JwtStrategy } from 'src/strategy/jwt.strategy';
+import { RefreshTokenStrategy } from 'src/strategy/refresh-token.strategy';
 dotenv.config();
 
 @Module({
@@ -15,9 +17,6 @@ dotenv.config();
     JwtModule.registerAsync({
       useFactory: async () => ({
         secret: process.env.JWT_SECRET,
-        signOptions: {
-          expiresIn: process.env.JWT_EXPIRATION,
-        },
       }),
     }),
     HttpModule.register({
@@ -31,6 +30,8 @@ dotenv.config();
   providers: [
     { useClass: AuthServiceImpl, provide: 'AuthService' },
     GoogleStrategy,
+    JwtStrategy,
+    RefreshTokenStrategy,
   ],
   exports: [],
 })

@@ -7,7 +7,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { DateTime } from 'luxon';
 
 @Injectable()
-export class JwtAuthGuard extends AuthGuard('jwt') {
+export class RefreshTokenGuard extends AuthGuard('jwt-refresh') {
   canActivate(context: ExecutionContext) {
     return super.canActivate(context);
   }
