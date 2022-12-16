@@ -1,9 +1,4 @@
-import {
-  BadRequestException,
-  Inject,
-  Injectable,
-  Logger,
-} from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { FindOptions } from 'sequelize/types';
 import { User } from 'src/database/entity/user.entity';
 import { UserDto } from 'src/types/user.dto';
