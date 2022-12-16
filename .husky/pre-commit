@@ -8,7 +8,7 @@ echo "Lint succeeded\n\n"
 
 echo "Linting staged files"
 echo "..."
-npx lint-staged --allow-empty && git add .
+npx lint-staged --allow-empty 
 echo "Staged files are ok\n\n"
 
 echo "Running tests"
