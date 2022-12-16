@@ -12,10 +12,11 @@ import { LoginFrom } from 'src/types/oauth-types.enum';
 export class User extends Model {
   @Column({
     primaryKey: true,
-    autoIncrement: true,
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
+    allowNull: false,
+    defaultValue: DataType.UUIDV4
   })
-  id: number;
+  id: string;
 
   @Column({
     allowNull: false,
