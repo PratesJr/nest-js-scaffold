@@ -1,4 +1,5 @@
 export class UserInfoDto {
+  sub?: string;
   email: string;
   firstName: string;
   lastName: string;

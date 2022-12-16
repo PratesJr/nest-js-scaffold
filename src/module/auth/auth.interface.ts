@@ -5,9 +5,8 @@ import { UserInfoDto } from 'src/types/auth-user.dto';
 import { AuthDto } from 'src/types/auth.dto';
 
 export interface AuthService {
-  generateToken(userInfo: UserInfoDto, now: number): AuthDto;
-  refreshToken(now: number, sub: string): string;
-  authenticate(req: UserInfoDto): AuthDto;
+  generateToken(userInfo: UserInfoDto, now: number): Promise<AuthDto>;
+  generateRefreshToken(now: number, sub: string): Promise<string>;
+  authenticate(req: UserInfoDto): Promise<AuthDto>;
   logout(token: string): Observable<AxiosResponse<any>>;
-  validate(): void;
 }
