@@ -2,6 +2,7 @@ import { Provider } from '@nestjs/common';
 import { Op } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import * as dotenv from 'dotenv';
+import { User } from './entity/user.entity';
 dotenv.config();
 
 export const DatabaseProvider: Provider = {
@@ -31,7 +32,7 @@ export const DatabaseProvider: Provider = {
         },
       },
     );
-    db.addModels([]);
+    db.addModels([User]);
 
     return db;
   },
