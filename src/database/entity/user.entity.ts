@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, AfterCreate } from 'sequelize-typescript';
 import { DateTime } from 'luxon';
+import { LoginFrom } from 'src/types/oauth-types.enum';
 @Table({
   modelName: 'user',
   tableName: 'user',
@@ -10,7 +11,7 @@ import { DateTime } from 'luxon';
   paranoid: true,
   deletedAt: 'deleted_at',
 })
-export class User extends Model<User> {
+export class User extends Model {
   @Column({
     primaryKey: true,
     autoIncrement: true,
@@ -29,6 +30,11 @@ export class User extends Model<User> {
     type: DataType.STRING,
   })
   email: string;
+  @Column({
+    allowNull: false,
+    type: DataType.STRING,
+  })
+  loginFrom: LoginFrom;
 
   @Column({
     type: DataType.DATE,
@@ -40,6 +46,7 @@ export class User extends Model<User> {
           .toFormat('YYYY-MM-DD HH:mm:ss')
         : null;
     },
+
   })
   createdAt: Date;
 
@@ -55,4 +62,11 @@ export class User extends Model<User> {
     },
   })
   updatedAt: Date;
+
+  @AfterCreate({ name: 'clearContent' })
+  static clearContent(instance: User) {
+    delete instance.loginFrom;
+    delete instance.createdAt;
+    delete instance.updatedAt;
+  };
 }
