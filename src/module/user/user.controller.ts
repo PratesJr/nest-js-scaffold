@@ -2,7 +2,6 @@ import {
   BadRequestException,
   Controller,
   Get,
-  HttpException,
   Inject,
   Logger,
   Param,

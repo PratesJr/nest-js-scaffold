@@ -1,4 +1,3 @@
-/* eslint-disable no-empty-function */
 import {
   ExceptionFilter,
   Catch,
@@ -16,7 +15,7 @@ const mappedCodes = {
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
-  // eslint-disable-next-line prettier/prettier, no-unused-vars
+  // eslint-disable-next-line prettier/prettier, no-unused-vars, no-empty-function
   constructor(private readonly httpAdapterHost: HttpAdapterHost) { }
 
   catch(exception: any, host: ArgumentsHost): void {

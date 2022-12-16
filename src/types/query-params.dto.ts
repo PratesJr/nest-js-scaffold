@@ -1,4 +1,4 @@
-import { IsNumberString, IsOptional, IsUUID } from 'class-validator';
+import { IsNumberString, IsOptional } from 'class-validator';
 
 export class QueryParams {
   @IsOptional()
