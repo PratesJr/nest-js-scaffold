@@ -16,6 +16,7 @@ import { QueryMethods } from 'src/helper/query-methods';
 import { UserQuery } from 'src/types/user-query.dto';
 import { UserService } from './user.interface';
 import { User } from 'src/database/entity/user.entity';
+import { isNil } from 'lodash';
 
 @UseGuards(JwtAuthGuard)
 @UseFilters(HttpExceptionFilter)
@@ -48,8 +49,19 @@ export class UserController {
   getUserByPK(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
   ): Promise<User> {
-    return this._userService.findByPK({
-      id,
-    });
+    return this._userService
+      .findByPK({
+        id,
+      })
+      .then((result) => {
+        if (isNil(result)) {
+          throw new Error('NOTFOUND');
+        }
+        return result;
+      })
+      .catch((err: Error) => {
+        this._logger.error(err);
+        throw err;
+      });
   }
 }

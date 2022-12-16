@@ -4,7 +4,6 @@ import { User } from 'src/database/entity/user.entity';
 import { Id } from 'src/types/id.dto';
 import { UserDto } from 'src/types/user.dto';
 import { UserService } from './user.interface';
-import { isNil } from 'lodash';
 
 @Injectable()
 export class UserServiceImpl implements UserService {
@@ -23,21 +22,11 @@ export class UserServiceImpl implements UserService {
   }
 
   findByPK({ id }: Id): Promise<User> {
-    return this._user
-      .findOne({
-        where: {
-          id,
-        },
-      })
-      .then((result) => {
-        if (isNil(result)) {
-          throw new Error('NOTFOUND');
-        }
-        return result;
-      })
-      .catch((err: Error) => {
-        throw err;
-      });
+    return this._user.findOne({
+      where: {
+        id,
+      },
+    });
   }
 
   count(query?: FindOptions<any>): Promise<number> {
