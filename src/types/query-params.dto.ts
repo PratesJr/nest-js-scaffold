@@ -1,10 +1,6 @@
-import { IsNumberString, IsOptional } from 'class-validator';
-import { IsUUID } from 'sequelize-typescript';
+import { IsNumberString, IsOptional, IsUUID } from 'class-validator';
 
 export class QueryParams {
-  @IsOptional()
-  @IsUUID(4)
-  id?: string;
   @IsOptional()
   @IsNumberString()
   limit?: string;

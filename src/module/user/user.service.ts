@@ -1,6 +1,7 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { FindOptions } from 'sequelize/types';
 import { User } from 'src/database/entity/user.entity';
+import { Id } from 'src/types/id.dto';
 import { UserDto } from 'src/types/user.dto';
 import { UserService } from './user.interface';
 
@@ -16,6 +17,16 @@ export class UserServiceImpl implements UserService {
   find(query?: FindOptions<any>): Promise<User[]> {
     return this._user.findAll({
       ...query,
+      logging: true,
+    });
+  }
+
+  findByPK(id: Id): Promise<User> {
+    console.log(id);
+    return this._user.findOne({
+      where: {
+        ...id,
+      },
     });
   }
 
