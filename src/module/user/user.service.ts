@@ -4,6 +4,7 @@ import { User } from 'src/database/entity/user.entity';
 import { Id } from 'src/types/id.dto';
 import { UserDto } from 'src/types/user.dto';
 import { UserService } from './user.interface';
+import { isEmpty } from 'lodash';
 
 @Injectable()
 export class UserServiceImpl implements UserService {
@@ -12,12 +13,15 @@ export class UserServiceImpl implements UserService {
   constructor(@Inject('UserEntity') private _user: typeof User) { }
 
   create(user: UserDto): Promise<User> {
-    return this._user.create({ ...user });
+    return this.find({
+      where: { email: user.email, loginFrom: user.loginFrom },
+    }).then((result) => {
+      return !isEmpty(result) ? result[0] : this._user.create({ ...user });
+    });
   }
   find(query?: FindOptions<any>): Promise<User[]> {
     return this._user.findAll({
       ...query,
-      logging: true,
     });
   }
 

@@ -7,7 +7,9 @@ import { LoginFrom } from 'src/types/oauth-types.enum';
   tableName: 'user',
   underscored: true,
   timestamps: true,
-  version: false
+  version: false,
+  paranoid: true,
+  deletedAt: 'deleted_at'
 })
 export class User extends Model {
   @Column({
@@ -27,6 +29,7 @@ export class User extends Model {
   @Column({
     allowNull: false,
     type: DataType.STRING,
+    unique: true
   })
   email: string;
   @Column({
