@@ -1,10 +1,8 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { UserInfoDto } from 'src/types/auth-user.dto';
 import { AuthService } from './auth.interface';
 import { isNil } from 'lodash';
 import { HttpService } from '@nestjs/axios';
-import { map, Observable } from 'rxjs';
-import { AxiosResponse } from 'axios';
 import * as dotenv from 'dotenv';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from 'src/types/jwt-payload.dto';
@@ -13,10 +11,12 @@ import { AuthDto } from 'src/types/auth.dto';
 import { UserService } from '../user/user.interface';
 import { LoginFrom } from 'src/types/oauth-types.enum';
 import { User } from 'src/database/entity/user.entity';
+import { Id } from 'src/types/id.dto';
 dotenv.config();
 @Injectable()
 export class AuthServiceImpl implements AuthService {
-  private route: string;
+  private _logger = new Logger('AUTH_SERVICE');
+  // private route: string;
 
   constructor(
     // eslint-disable-next-line no-unused-vars
@@ -27,7 +27,7 @@ export class AuthServiceImpl implements AuthService {
     // eslint-disable-next-line no-unused-vars
     @Inject('UserService') private _userService: UserService,
   ) {
-    this.route = process.env.REVOKE_GOOGLE_TOKEN_URI;
+    // this.route = process.env.REVOKE_GOOGLE_TOKEN_URI;
   }
   authenticate(user: UserInfoDto): Promise<AuthDto> {
     if (isNil(user)) {
@@ -46,43 +46,80 @@ export class AuthServiceImpl implements AuthService {
         );
       });
   }
+  //TODO: cache the old refresh token in a deny list
+  refreshCredentials(userId: Id): Promise<AuthDto> {
+    return this._userService
+      .findByPK(userId)
+      .then((user) => {
+        return this.generateToken(
+          { ...user, sub: user.id },
+          DateTime.utc().toMillis(),
+        ).then((credentials) => {
+          return credentials;
+        });
+      })
+      .catch((err) => {
+        this._logger.error(err);
+        throw err;
+      });
+  }
 
   generateToken(userInfo: UserInfoDto, now: number): Promise<AuthDto> {
     const payload: JwtPayload = this.makeJwtPayload(userInfo, now);
-    return this.jwtService.signAsync(payload).then((accessToken: string) => {
-      return this.generateRefreshToken(now, payload.sub).then(
-        (refreshToken: string) => {
+    return this.jwtService
+      .signAsync(JSON.stringify(payload))
+      .then((accessToken: string) => {
+        return this.generateRefreshToken(
+          now,
+          payload.sub,
+          payload.username,
+        ).then((refreshToken: string) => {
           return {
             accessToken,
             refreshToken,
           };
-        },
-      );
-    });
+        });
+      });
   }
 
-  generateRefreshToken(now: number, sub: string): Promise<string> {
-    return this.jwtService.signAsync({
-      sub,
-      iat: now,
-      exp: DateTime.fromMillis(now)
-        .plus({
-          seconds: Number(process.env.JWT_REFRESH_TOKEN_EXP),
-        })
-        .toUTC()
-        .toMillis(),
-      code: process.env.JWT_REFRESH_TOKEN_CODE,
-    });
+  generateRefreshToken(
+    now: number,
+    sub: string,
+    username: string,
+  ): Promise<string> {
+    return this.jwtService.signAsync(
+      JSON.stringify({
+        sub,
+        iat: now,
+        exp: DateTime.fromMillis(now)
+          .plus({
+            seconds: Number(process.env.JWT_REFRESH_TOKEN_EXP),
+          })
+          .toUTC()
+          .toMillis(),
+        username,
+        expiresAt: DateTime.fromMillis(now)
+          .plus({
+            seconds: Number(process.env.JWT_REFRESH_TOKEN_EXP),
+          })
+          .toUTC()
+          .toISO()
+          .toString(),
+      }),
+      { secret: process.env.JWT_REFRESH_TOKEN_SECRET },
+    );
   }
 
-  logout(token: string): Observable<AxiosResponse<any>> {
-    return this.httpService
-      .get(`${this.route}${token}`)
-      .pipe(map((response) => response.data));
-  }
+  // oAuthlogout(token: string): Observable<AxiosResponse<any>> {
+  //   return this.httpService
+  //     .get(`${this.route}${token}`)
+  //     .pipe(map((response) => response.data));
+  // }
+
+  // logout(token: string): Observable<AxiosResponse<any>> { }
   private makeJwtPayload(userInfo: UserInfoDto, now: number): JwtPayload {
     return {
-      sub: '',
+      sub: userInfo.sub,
       exp: DateTime.fromMillis(now)
         .plus({
           seconds: Number(process.env.JWT_EXPIRATION),
@@ -90,15 +127,7 @@ export class AuthServiceImpl implements AuthService {
         .toUTC()
         .toMillis(),
       iat: now,
-      expiresAt: DateTime.fromMillis(now)
-        .plus({
-          seconds: Number(process.env.JWT_EXPIRATION),
-        })
-        .toUTC()
-        .toISO()
-        .toString(),
       username: userInfo.email,
-      fullName: `${userInfo.firstName} ${userInfo.lastName}`,
     };
   }
 }
