@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { DateTime } from 'luxon';
-
 @Injectable()
 export class RefreshTokenGuard extends AuthGuard('jwt-refresh') {
   canActivate(context: ExecutionContext) {
@@ -14,7 +13,7 @@ export class RefreshTokenGuard extends AuthGuard('jwt-refresh') {
 
   handleRequest(err, user) {
     if (!user) {
-      new UnauthorizedException();
+      throw new UnauthorizedException('UNAUTHORIZED');
     }
     if (err) {
       throw err;
@@ -23,7 +22,7 @@ export class RefreshTokenGuard extends AuthGuard('jwt-refresh') {
       DateTime.now().toUTC().toISO() >=
       DateTime.fromMillis(Number(user.exp)).toUTC().toISO()
     ) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('UNAUTHORIZED');
     }
     return user;
   }

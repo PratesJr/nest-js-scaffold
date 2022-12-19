@@ -16,6 +16,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       login_from: {
         type: Sequelize.STRING,
@@ -24,6 +25,9 @@ module.exports = {
         type: Sequelize.DATE,
       },
       updated_at: {
+        type: Sequelize.DATE,
+      },
+      deleted_at: {
         type: Sequelize.DATE,
       },
     });

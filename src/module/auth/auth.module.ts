@@ -10,6 +10,7 @@ import { GoogleStrategy } from '../../strategy/google.strategy';
 import { HttpModule } from '@nestjs/axios';
 import { JwtStrategy } from 'src/strategy/jwt.strategy';
 import { RefreshTokenStrategy } from 'src/strategy/refresh-token.strategy';
+import { UserModule } from '../user/user.module';
 dotenv.config();
 
 @Module({
@@ -25,6 +26,7 @@ dotenv.config();
     }),
     ConfigModule,
     PassportModule,
+    UserModule,
   ],
   controllers: [GoogleAuthController],
   providers: [

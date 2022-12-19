@@ -1,13 +1,16 @@
 /* eslint-disable no-unused-vars */
-import { AxiosResponse } from 'axios';
-import { Observable } from 'rxjs';
 import { UserInfoDto } from 'src/types/auth-user.dto';
 import { AuthDto } from 'src/types/auth.dto';
+import { Id } from 'src/types/id.dto';
 
 export interface AuthService {
-  generateToken(userInfo: UserInfoDto, now: number): AuthDto;
-  refreshToken(now: number, sub: string): string;
-  authenticate(req: UserInfoDto): AuthDto;
-  logout(token: string): Observable<AxiosResponse<any>>;
-  validate(): void;
+  generateToken(userInfo: UserInfoDto, now: number): Promise<AuthDto>;
+  generateRefreshToken(
+    now: number,
+    sub: string,
+    username: string,
+  ): Promise<string>;
+  authenticate(req: UserInfoDto): Promise<AuthDto>;
+  refreshCredentials(userId: Id): Promise<AuthDto>;
+  // logout(token: string): Observable<AxiosResponse<any>>;
 }
