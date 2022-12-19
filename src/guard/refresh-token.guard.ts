@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { DateTime } from 'luxon';
-import { isNil, isBoolean } from 'lodash';
 @Injectable()
 export class RefreshTokenGuard extends AuthGuard('jwt-refresh') {
   canActivate(context: ExecutionContext) {
