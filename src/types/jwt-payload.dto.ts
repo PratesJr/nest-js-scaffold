@@ -3,6 +3,5 @@ export class JwtPayload {
   sub: string;
   iat: number;
   exp: number;
-  expiresAt: string;
-  fullName: string;
+  expiresAt?: string;
 }

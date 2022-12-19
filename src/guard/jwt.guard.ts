@@ -14,7 +14,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   handleRequest(err, user) {
     if (!user) {
-      new UnauthorizedException();
+      new UnauthorizedException('UNAUTHORIZED');
     }
     if (err) {
       throw err;
@@ -23,7 +23,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       DateTime.now().toUTC().toISO() >=
       DateTime.fromMillis(Number(user.exp)).toUTC().toISO()
     ) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('UNAUTHORIZED');
     }
     return user;
   }
