@@ -17,7 +17,7 @@ import { AuthService } from './auth.interface';
 //TODO: refresh token and methods
 export class GoogleAuthController {
   // eslint-disable-next-line no-empty-function, prettier/prettier, no-unused-vars
-  constructor(@Inject('AuthService') private _authService: AuthService) { }
+  constructor(@Inject('AuthService') private _authService: AuthService,) { }
 
   @Get()
   @UseGuards(GoogleOAuthGuard)
@@ -38,9 +38,12 @@ export class GoogleAuthController {
     return this._authService.refreshCredentials({ id: req.user.sub });
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('hello')
-  hello(): any {
-    return 'hello';
-  }
+  // @UseGuards(JwtAuthGuard)
+  // @Get('hello')
+  // async hello() {
+  //   await this.cacheService.set('id', 'data');
+  //   const cachedData = await this.cacheService.get('id');
+  //   console.log('data set to cache', cachedData);
+  //   return 'hello';
+  // }
 }
