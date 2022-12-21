@@ -37,7 +37,6 @@ export class GoogleAuthController {
   @UseGuards(RefreshTokenGuard)
   @Get('refresh-token')
   refreshCredential(@Request() _req: any): Promise<AuthDto> {
-    console.log(_req.user);
     return this._authService
       .refreshCredentials({ id: _req.user.sub })
       .then((accessToken: string) => {
