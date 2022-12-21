@@ -15,7 +15,8 @@ import { AuthDto } from 'src/types/auth.dto';
 import { AuthService } from './auth.interface';
 
 @Controller('auth/google')
-//TODO: refresh token and methods
+//TODO: Change jwt  guards policy to verify deny list
+//TODO: Be sure that the refresh token route is working well
 export class GoogleAuthController {
   // eslint-disable-next-line no-empty-function,  no-unused-vars
   constructor(@Inject('AuthService') private _authService: AuthService) { }

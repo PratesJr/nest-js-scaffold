@@ -2,7 +2,7 @@ import { entityParams } from './entity-param';
 import { isNil } from 'lodash';
 
 //TODO create  method to validate common query params
-//TODO create method to specific query params like user request
+
 
 export class QueryMethods {
   private _mapper: Map<string, string[]>;
