@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { CacheModule, Module } from '@nestjs/common';
+import { CacheServiceImpl } from './cache.service';
 import { RedisInstance } from './redis-instance';
 
 @Module({
@@ -10,8 +11,8 @@ import { RedisInstance } from './redis-instance';
     }),
   ],
   controllers: [],
-  providers: [],
+  providers: [{ provide: 'RedisCacheService', useClass: CacheServiceImpl }],
+  exports: [{ provide: 'RedisCacheService', useClass: CacheServiceImpl }],
 })
-// eslint-disable-next-line prettier/prettier
-export class RedisCacheModule {
-}
+
+export class RedisCacheModule { }

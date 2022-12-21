@@ -1,5 +1,11 @@
-/* eslint-disable prettier/prettier */
-import { Table, Column, Model, DataType, AfterCreate } from 'sequelize-typescript';
+
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  AfterCreate,
+} from 'sequelize-typescript';
 import { DateTime } from 'luxon';
 import { LoginFrom } from 'src/types/oauth-types.enum';
 @Table({
@@ -9,14 +15,14 @@ import { LoginFrom } from 'src/types/oauth-types.enum';
   timestamps: true,
   version: false,
   paranoid: true,
-  deletedAt: 'deleted_at'
+  deletedAt: 'deleted_at',
 })
 export class User extends Model {
   @Column({
     primaryKey: true,
     type: DataType.UUIDV4,
     allowNull: false,
-    defaultValue: DataType.UUIDV4
+    defaultValue: DataType.UUIDV4,
   })
   id: string;
 
@@ -29,7 +35,7 @@ export class User extends Model {
   @Column({
     allowNull: false,
     type: DataType.STRING,
-    unique: true
+    unique: true,
   })
   email: string;
   @Column({
@@ -48,7 +54,6 @@ export class User extends Model {
           .toFormat('YYYY-MM-DD HH:mm:ss')
         : null;
     },
-
   })
   createdAt: Date;
 
@@ -70,5 +75,5 @@ export class User extends Model {
     delete instance.loginFrom;
     delete instance.createdAt;
     delete instance.updatedAt;
-  };
+  }
 }

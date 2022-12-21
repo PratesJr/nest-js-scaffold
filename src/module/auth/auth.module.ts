@@ -11,6 +11,7 @@ import { HttpModule } from '@nestjs/axios';
 import { JwtStrategy } from 'src/strategy/jwt.strategy';
 import { RefreshTokenStrategy } from 'src/strategy/refresh-token.strategy';
 import { UserModule } from '../user/user.module';
+import { RedisCacheModule } from '../cache/cache.module';
 dotenv.config();
 
 @Module({
@@ -27,6 +28,7 @@ dotenv.config();
     ConfigModule,
     PassportModule,
     UserModule,
+    RedisCacheModule,
   ],
   controllers: [GoogleAuthController],
   providers: [
@@ -37,5 +39,5 @@ dotenv.config();
   ],
   exports: [],
 })
-// eslint-disable-next-line prettier/prettier
+
 export class AuthModule { }

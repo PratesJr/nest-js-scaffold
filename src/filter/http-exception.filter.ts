@@ -16,11 +16,13 @@ import { isNil } from 'lodash';
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
-  // eslint-disable-next-line prettier/prettier, no-unused-vars, no-empty-function
+  // eslint-disable-next-line no-unused-vars, no-empty-function
   constructor(private readonly httpAdapterHost: HttpAdapterHost) { }
 
   catch(exception: any, host: ArgumentsHost): void {
     const { httpAdapter } = this.httpAdapterHost;
+
+    console.log(exception);
 
     const ctx = host.switchToHttp();
     const httpStatus = this.getCode(exception);

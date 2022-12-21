@@ -14,7 +14,6 @@ export class HttpLogMiddleware implements NestMiddleware {
       const { statusCode } = response;
       const now = Date.now();
       this.logger[errorCodes.includes(statusCode) ? 'error' : 'log'](
-        // eslint-disable-next-line prettier/prettier
         `${method} ${baseUrl} - statusCode: ${statusCode} - user-agent: ${userAgent} - after ${Date.now() - now
         }ms`,
       );

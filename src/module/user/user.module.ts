@@ -17,5 +17,5 @@ dotenv.config();
     { provide: 'UserEntity', useValue: User },
   ],
 })
-// eslint-disable-next-line prettier/prettier
+
 export class UserModule { }

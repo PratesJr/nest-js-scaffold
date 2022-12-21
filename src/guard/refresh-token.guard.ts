@@ -12,6 +12,14 @@ export class RefreshTokenGuard extends AuthGuard('jwt-refresh') {
   }
 
   handleRequest(err, user) {
+    console.log(
+      Math.round(
+        DateTime.fromMillis(
+          Number(DateTime.fromMillis(user.exp).diffNow()),
+        ).toSeconds(),
+      ),
+    );
+
     if (!user) {
       throw new UnauthorizedException('UNAUTHORIZED');
     }

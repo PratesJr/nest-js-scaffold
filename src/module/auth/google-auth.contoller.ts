@@ -16,7 +16,7 @@ import { AuthService } from './auth.interface';
 @Controller('auth/google')
 //TODO: refresh token and methods
 export class GoogleAuthController {
-  // eslint-disable-next-line no-empty-function, prettier/prettier, no-unused-vars
+  // eslint-disable-next-line no-empty-function,  no-unused-vars
   constructor(@Inject('AuthService') private _authService: AuthService,) { }
 
   @Get()
@@ -28,22 +28,28 @@ export class GoogleAuthController {
   @Get('redirect')
   @UseGuards(GoogleOAuthGuard)
   @HttpCode(200)
-  redirect(@Req() _req): Promise<AuthDto> {
+  redirect(@Req() _req: any): Promise<AuthDto> {
     return this._authService.authenticate(_req.user);
   }
 
   @UseGuards(RefreshTokenGuard)
   @Get('refresh-token')
-  refreshToken(@Request() req: any): Promise<AuthDto> {
-    return this._authService.refreshCredentials({ id: req.user.sub });
+  refreshCredential(@Request() _req: any): Promise<AuthDto> {
+    console.log(_req.user);
+    return this._authService
+      .refreshCredentials({ id: _req.user.sub })
+      .then((accessToken: string) => {
+        return {
+          accessToken,
+          refreshToken: _req.user.refreshToken,
+        };
+      });
   }
 
-  // @UseGuards(JwtAuthGuard)
-  // @Get('hello')
-  // async hello() {
-  //   await this.cacheService.set('id', 'data');
-  //   const cachedData = await this.cacheService.get('id');
-  //   console.log('data set to cache', cachedData);
-  //   return 'hello';
-  // }
+  @UseGuards(JwtAuthGuard)
+  logout(@Request() req: any): Promise<void> {
+    // return this._authService.
+    return null;
+
+  }
 }
