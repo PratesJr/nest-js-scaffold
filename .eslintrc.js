@@ -10,6 +10,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
+    'plugin:prettier/recommended'
   ],
   root: true,
   env: {
@@ -18,6 +19,7 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
+    'prettier/prettier': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -37,6 +39,6 @@ module.exports = {
     camelcase: 'error',
     'for-direction': 'error',
     'no-const-assign': 'error',
-    'no-irregular-whitespace': ['error', { skipComments: true }],
+    'no-irregular-whitespace': ['warn', { skipComments: true }],
   },
 };
