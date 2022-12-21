@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   HttpCode,
+  HttpStatus,
   Inject,
   Req,
   Request,
@@ -17,7 +18,7 @@ import { AuthService } from './auth.interface';
 //TODO: refresh token and methods
 export class GoogleAuthController {
   // eslint-disable-next-line no-empty-function,  no-unused-vars
-  constructor(@Inject('AuthService') private _authService: AuthService,) { }
+  constructor(@Inject('AuthService') private _authService: AuthService) { }
 
   @Get()
   @UseGuards(GoogleOAuthGuard)
@@ -47,9 +48,14 @@ export class GoogleAuthController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Get('logout')
   logout(@Request() req: any): Promise<void> {
-    // return this._authService.
-    return null;
 
+    return this._authService.logout(
+      req.user.accessToken,
+      req.user.sub,
+      Number(req.user.exp),
+    );
   }
 }
