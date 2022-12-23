@@ -26,10 +26,8 @@ export class UserController {
   private _queryMethods = new QueryMethods();
   private _logger = new Logger('USER_CONTROLLER');
   private readonly entity = 'User';
-  // eslint-disable-next-line no-empty-function, prettier/prettier, no-unused-vars
-  constructor(@Inject('UserService') private _userService: UserService) {
-
-  }
+  // eslint-disable-next-line no-empty-function, no-unused-vars
+  constructor(@Inject('UserService') private _userService: UserService) { }
 
   @Get()
   getUser(@Query() query: UserQuery): any {

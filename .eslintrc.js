@@ -5,10 +5,12 @@ module.exports = {
     tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin', 'prettier'],
+  plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
+    'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    'prettier',
+    'plugin:prettier/recommended'
   ],
   root: true,
   env: {
@@ -17,15 +19,15 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
     'no-multi-spaces': ['warn'],
-    'semi': ['error', 'always'],
-    'space-before-blocks': ['error', 'always'],
+    semi: ['error', 'always'],
+    'space-before-blocks': ['warn', 'always'],
     'block-spacing': ['warn', 'always'],
     'no-plusplus': ['warn'],
     'no-return-await': ['error'],
@@ -33,10 +35,10 @@ module.exports = {
     'no-empty-function': ['error'],
     'no-eq-null': ['error'],
     'no-console': ['warn'],
-    'eqeqeq': ['error', 'always'],
-    'camelcase': 'error',
+    eqeqeq: ['error', 'always'],
+    camelcase: 'error',
     'for-direction': 'error',
     'no-const-assign': 'error',
-    'no-irregular-whitespace': ['error', { 'skipComments': true }]
+    'no-irregular-whitespace': ['warn', { skipComments: true }],
   },
 };

@@ -9,7 +9,7 @@ import { isEmpty } from 'lodash';
 @Injectable()
 export class UserServiceImpl implements UserService {
   private _logger = new Logger('USER_SERVICE');
-  // eslint-disable-next-line no-unused-vars, no-empty-function, prettier/prettier
+  // eslint-disable-next-line no-unused-vars, no-empty-function
   constructor(@Inject('UserEntity') private _user: typeof User) { }
 
   create(user: UserDto): Promise<User> {

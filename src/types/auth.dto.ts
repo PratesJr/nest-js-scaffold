@@ -1,4 +1,4 @@
 export class AuthDto {
   accessToken: string;
-  // refreshToken: string;
+  refreshToken: string;
 }
