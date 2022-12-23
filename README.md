@@ -1,7 +1,7 @@
 
 # Description
 
-This Project is a NestJs TypeScript scaffold to all my personal projects.
+This Project is a NestJs TypeScript boilerplate for all my personal projects.
 
 ## What is included
 
@@ -10,11 +10,13 @@ This Project is a NestJs TypeScript scaffold to all my personal projects.
 - ESLINT configuration
 - Database Container
 - Sequelize ORM
+- OAuth2 and Jwt Strategy
+- Caching with Redis
 
 ## Pending  Features
 
-- OAuth Strategy
 - Swagger documentation
+- Jest tests coverage
 
 ## System Requirements
 
@@ -47,7 +49,7 @@ docker-compose up -d
 $ npm run start
 
 # watch mode
-$ npm run start:dev
+$ npm run dev
 
 # production mode
 $ npm run start:prod
