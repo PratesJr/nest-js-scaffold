@@ -30,9 +30,8 @@ export class RefreshTokenGuard extends AuthGuard('jwt-refresh') {
       throw new UnauthorizedException('UNAUTHORIZED');
     }
 
-    const refreshToken = this._cacheService.get(`${CacheKeyType.DENY_LIST}_${user.sub}`).then((result: any) => {
-      return result;
-    });
+    const refreshToken = this.getCache(user);
+
     if (isNil(refreshToken)) {
       throw new UnauthorizedException('UNAUTHORIZED');
     }
@@ -46,5 +45,13 @@ export class RefreshTokenGuard extends AuthGuard('jwt-refresh') {
       throw new UnauthorizedException('UNAUTHORIZED');
     }
     return user;
+  }
+
+  getCache(user): any {
+    const token = this._cacheService.get(`${CacheKeyType.DENY_LIST}_${user.sub}`);
+
+    return Promise.resolve(token).then((resolved) => {
+      return resolved;
+    });
   }
 }

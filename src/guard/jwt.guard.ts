@@ -9,7 +9,6 @@ import { DateTime } from 'luxon';
 import { CacheService } from 'src/module/cache/cache.interface';
 import { CacheKeyType } from 'src/types/cache-types.enum';
 import { isNil } from 'lodash';
-
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
 
@@ -26,10 +25,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     if (!user) {
       throw new UnauthorizedException('UNAUTHORIZED');
     }
-    const revokedToken = this._cacheService.get(`${CacheKeyType.DENY_LIST}_${user.sub}`).then((result) => {
-      return result;
-    });
-    if (!isNil(revokedToken)) {
+    const userToken = this.getCache(user);
+
+    if (!isNil(userToken)) {
       throw new UnauthorizedException('UNAUTHORIZED');
     }
     if (err) {
@@ -43,4 +41,13 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     }
     return user;
   }
+
+  getCache(user): any {
+    const token = this._cacheService.get(`${CacheKeyType.DENY_LIST}_${user.sub}`);
+
+    return Promise.resolve(token).then((resolved) => {
+      return resolved;
+    });
+  }
+
 }

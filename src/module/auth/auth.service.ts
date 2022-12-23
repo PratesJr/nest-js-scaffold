@@ -37,31 +37,31 @@ export class AuthServiceImpl implements AuthService {
     return isNil(user)
       ? null
       : this._userService
-          .create({
-            email: user.email,
-            loginFrom: LoginFrom.GOOGLE,
-            name: `${user.firstName} ${user.lastName}`,
-          })
-          .then((register: User) => {
-            const now = DateTime.utc().toMillis();
-            return this.generateToken({ ...user, sub: register.id }, now)
-              .then((accessToken: string) => {
-                return this.generateRefreshToken(
-                  now,
-                  register.id,
-                  register.email,
-                ).then((refreshToken: string) => {
-                  return {
-                    accessToken,
-                    refreshToken,
-                  };
-                });
-              })
-              .catch((err) => {
-                this._logger.error(err);
-                throw new Error('UNAUTHORIZED');
+        .create({
+          email: user.email,
+          loginFrom: LoginFrom.GOOGLE,
+          name: `${user.firstName} ${user.lastName}`,
+        })
+        .then((register: User) => {
+          const now = DateTime.utc().toMillis();
+          return this.generateToken({ ...user, sub: register.id }, now)
+            .then((accessToken: string) => {
+              return this.generateRefreshToken(
+                now,
+                register.id,
+                register.email,
+              ).then((refreshToken: string) => {
+                return {
+                  accessToken,
+                  refreshToken,
+                };
               });
-          });
+            })
+            .catch((err) => {
+              this._logger.error(err);
+              throw new Error('UNAUTHORIZED');
+            });
+        });
   }
   refreshCredentials(userId: Id): Promise<string> {
     return this._userService.findByPK(userId).then((user: User) => {
@@ -121,19 +121,23 @@ export class AuthServiceImpl implements AuthService {
   //     .pipe(map((response) => response.data));
   // }
 
-  logout(token: string, userId: string, exp: number): Promise<void> {
+  logout(token: string): Promise<void> {
+
+    const payload: any = this.jwtService.decode(token, { json: true });
+
     const ttl = Math.round(
       DateTime.fromMillis(
-        Number(DateTime.fromMillis(exp).diffNow()),
+        Number(DateTime.fromMillis(payload.exp).diffNow()),
       ).toSeconds(),
     );
 
+
     return this._cacheService
-      .remove(`${CacheKeyType.REFRESH_TOKEN}_${userId}`)
+      .remove(`${CacheKeyType.REFRESH_TOKEN}_${payload.sub}`)
       .then(() => {
         this._cacheService.cache({
           key: CacheKeyType.DENY_LIST,
-          userId,
+          userId: payload.sub,
           value: token,
           ttl,
         });

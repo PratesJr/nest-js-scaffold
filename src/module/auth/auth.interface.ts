@@ -12,6 +12,6 @@ export interface AuthService {
   ): Promise<string>;
   authenticate(req: UserInfoDto): Promise<AuthDto>;
   refreshCredentials(userId: Id): Promise<string>;
-  logout(token: string, userId: string, exp: number): Promise<void>;
+  logout(token: string): Promise<void>;
   // OAuthLogout(token: string): Observable<AxiosResponse<any>>;
 }

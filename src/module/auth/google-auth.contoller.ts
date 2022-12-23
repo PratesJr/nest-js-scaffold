@@ -9,13 +9,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { GoogleOAuthGuard } from 'src/guard/google.oauth.guard';
-import { JwtAuthGuard } from 'src/guard/jwt.guard';
 import { RefreshTokenGuard } from 'src/guard/refresh-token.guard';
 import { AuthDto } from 'src/types/auth.dto';
 import { AuthService } from './auth.interface';
 
 @Controller('auth/google')
-//TODO: Change jwt  guards policy to verify deny list
 //TODO: Be sure that the refresh token route is working well
 export class GoogleAuthController {
   // eslint-disable-next-line no-empty-function,  no-unused-vars
@@ -47,15 +45,10 @@ export class GoogleAuthController {
       });
   }
 
-  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   @Get('logout')
   logout(@Request() req: any): Promise<void> {
-
-    return this._authService.logout(
-      req.user.accessToken,
-      req.user.sub,
-      Number(req.user.exp),
-    );
+    const accessToken = req.get('Authorization').replace('Bearer', '').trim();
+    return this._authService.logout(accessToken);
   }
 }
