@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { AppController } from './app.controller';
+
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { HttpLogMiddleware } from './middleware/http-log.middleware';
@@ -10,7 +10,7 @@ import { UserModule } from './module/user/user.module';
 
 @Module({
   imports: [DatabaseModule, AuthModule, UserModule],
-  controllers: [AppController],
+  controllers: [],
   providers: [AppService],
 })
 // eslint-disable-next-line 
