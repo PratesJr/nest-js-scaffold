@@ -17,7 +17,17 @@ import { UserQuery } from 'src/types/user-query.dto';
 import { UserService } from './user.interface';
 import { User } from 'src/database/entity/user.entity';
 import { isNil } from 'lodash';
-
+import {
+  ApiTags,
+  ApiOkResponse,
+  ApiUnauthorizedResponse,
+  ApiBadRequestResponse,
+  ApiNotFoundResponse,
+  ApiQuery,
+  ApiBearerAuth
+} from '@nestjs/swagger';
+@ApiTags('User')
+@ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @UseFilters(HttpExceptionFilter)
 @Controller('user')
@@ -29,7 +39,14 @@ export class UserController {
   // eslint-disable-next-line no-empty-function, no-unused-vars
   constructor(@Inject('UserService') private _userService: UserService) { }
 
+
   @Get()
+  @ApiOkResponse({
+    status: 200,
+    description: 'return a list of user'
+  })
+  @ApiUnauthorizedResponse()
+  @ApiBadRequestResponse()
   getUser(@Query() query: UserQuery): any {
     const { where } = this._queryMethods.queryConstructor(this.entity, query);
 
@@ -43,7 +60,17 @@ export class UserController {
         throw new BadRequestException();
       });
   }
+
   @Get(':id')
+  @ApiNotFoundResponse()
+  @ApiOkResponse({
+    description: 'return the user found by provided ID',
+  })
+  @ApiQuery({
+    name: 'id',
+    type: String,
+    required: true
+  })
   getUserByPK(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
   ): Promise<User> {
