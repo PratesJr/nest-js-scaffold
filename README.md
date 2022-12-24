@@ -12,10 +12,10 @@ This Project is a NestJs TypeScript boilerplate for all my personal projects.
 - Sequelize ORM
 - OAuth2 and Jwt Strategy
 - Caching with Redis
+- Swagger docs
 
 ## Pending  Features
 
-- Swagger documentation
 - Jest tests coverage
 
 ## System Requirements
