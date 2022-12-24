@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { HttpLogMiddleware } from './middleware/http-log.middleware';
