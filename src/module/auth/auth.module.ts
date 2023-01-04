@@ -12,7 +12,7 @@ import { JwtStrategy } from 'src/strategy/jwt.strategy';
 import { RefreshTokenStrategy } from 'src/strategy/refresh-token.strategy';
 import { UserModule } from '../user/user.module';
 
-import { CacheLibModule } from '@app/cache';
+import { CacheLibModule } from '@lib/cache';
 dotenv.config();
 
 @Module({
