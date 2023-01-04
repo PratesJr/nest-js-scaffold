@@ -8,8 +8,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { DateTime } from 'luxon';
 
 import { isNil } from 'lodash';
-import { CacheService } from '@app/cache';
-import { CacheKeyType } from '@app/cache/dto/cache-types.enum';
+import { CacheService } from '@lib/cache';
+import { CacheKeyType } from '@lib/cache/dto/cache-types.enum';
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
 
