@@ -11,7 +11,8 @@ import { HttpModule } from '@nestjs/axios';
 import { JwtStrategy } from 'src/strategy/jwt.strategy';
 import { RefreshTokenStrategy } from 'src/strategy/refresh-token.strategy';
 import { UserModule } from '../user/user.module';
-import { RedisCacheModule } from '../cache/cache.module';
+
+import { CacheLibModule } from '@app/cache';
 dotenv.config();
 
 @Module({
@@ -28,7 +29,9 @@ dotenv.config();
     ConfigModule,
     PassportModule,
     UserModule,
-    RedisCacheModule,
+    CacheLibModule
+
+
   ],
   controllers: [GoogleAuthController],
   providers: [

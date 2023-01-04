@@ -1,4 +1,5 @@
-import { CacheDto } from 'src/types/cache.dto';
+import { CacheDto } from './dto/cache.dto';
+
 
 /* eslint-disable no-unused-vars */
 export interface CacheService {

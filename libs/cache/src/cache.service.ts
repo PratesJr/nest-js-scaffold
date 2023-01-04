@@ -1,7 +1,8 @@
 import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
 import { CacheService } from './cache.interface';
 import { Cache } from 'cache-manager';
-import { CacheDto } from 'src/types/cache.dto';
+import { CacheDto } from './dto/cache.dto';
+
 
 @Injectable()
 export class CacheServiceImpl implements CacheService {

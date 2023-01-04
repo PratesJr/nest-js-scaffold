@@ -6,9 +6,9 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { DateTime } from 'luxon';
-import { CacheService } from 'src/module/cache/cache.interface';
-import { CacheKeyType } from 'src/types/cache-types.enum';
 import { isNil } from 'lodash';
+import { CacheService } from '@app/cache';
+import { CacheKeyType } from '@app/cache/dto/cache-types.enum';
 @Injectable()
 export class RefreshTokenGuard extends AuthGuard('jwt-refresh') {
 
