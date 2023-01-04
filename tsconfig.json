@@ -18,11 +18,41 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/cache": [
+      "@lib/cache": [
         "libs/cache/src"
       ],
-      "@app/cache/*": [
+      "@lib/cache/*": [
         "libs/cache/src/*"
+      ],
+      "@api-module/auth": [
+        "src/module/auth"
+      ],
+      "@api-module/auth/*": [
+        "src/module/auth/*"
+      ],
+      "@api-module/user": [
+        "src/module/user"
+      ],
+      "@api-module/user/*": [
+        "src/module/user/*"
+      ],
+      "@helper": [
+        "src/helper"
+      ],
+      "@helper/*": [
+        "src/helper/*"
+      ],
+      "@database": [
+        "src/database"
+      ],
+      "@database/*": [
+        "src/database/*"
+      ],
+      "@entity/*": [
+        "src/database/entity/*"
+      ],
+      "@dto/*": [
+        "src/types/*"
       ]
     }
   }
