@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { GoogleOAuthGuard } from 'src/guard/google.oauth.guard';
 import { RefreshTokenGuard } from 'src/guard/refresh-token.guard';
-import { AuthDto } from 'src/types/auth.dto';
 import { AuthService } from './auth.interface';
 import {
   ApiTags,
@@ -21,6 +20,7 @@ import {
   ApiUnauthorizedResponse,
   ApiOkResponse
 } from '@nestjs/swagger';
+import { AuthDto } from 'src/types/auth.dto';
 @ApiTags('Authentication')
 @Controller('auth/google')
 //TODO: Be sure that the refresh token route is working well

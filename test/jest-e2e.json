@@ -1,9 +1,26 @@
 {
-  "moduleFileExtensions": ["js", "json", "ts"],
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
   "rootDir": ".",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@lib/cache/(.*)": "<rootDir>/../libs/cache/src/$1",
+    "@lib/cache": "<rootDir>/../libs/cache/src",
+    "@api-module/auth/(.*)": "<rootDir>../src/module/auth/$1",
+    "@api-module/auth": "<rootDir>../src/module/auth",
+    "@api-module/user(.*)": "<rootDir>../src/module/user/$1",
+    "@api-module/user": "<rootDir>../src/module/user",
+    "@helper(.*)": "<rootDir>../src/helper/$1",
+    "@helper": "<rootDir>../src/helper",
+    "@database(.*)": "<rootDir>src/database/$1",
+    "@entity(.*)": "<rootDir>../src/database/entity/$1",
+    "@dto(.*)": "<rootDir>../src/types/$1"
   }
 }

@@ -12,8 +12,9 @@ import { UserService } from '../user/user.interface';
 import { LoginFrom } from 'src/types/oauth-types.enum';
 import { User } from 'src/database/entity/user.entity';
 import { Id } from 'src/types/id.dto';
-import { CacheService } from '../cache/cache.interface';
-import { CacheKeyType } from 'src/types/cache-types.enum';
+import { CacheService } from '@lib/cache';
+import { CacheKeyType } from '@lib/cache/dto/cache-types.enum';
+
 dotenv.config();
 @Injectable()
 export class AuthServiceImpl implements AuthService {
