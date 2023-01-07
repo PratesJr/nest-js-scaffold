@@ -6,4 +6,4 @@ import { DatabaseProvider } from './database.provider';
   exports: [DatabaseProvider],
 })
 // eslint-disable-next-line 
-export class DatabaseModule { }
+export class DatabaseLibModule { }

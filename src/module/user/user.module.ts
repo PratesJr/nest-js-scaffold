@@ -1,7 +1,7 @@
+import { User } from '@app/database/entity/user.entity';
 import { Module } from '@nestjs/common';
 
 import * as dotenv from 'dotenv';
-import { User } from 'src/database/entity/user.entity';
 import { UserController } from './user.controller';
 import { UserServiceImpl } from './user.service';
 dotenv.config();
@@ -17,5 +17,4 @@ dotenv.config();
     { provide: 'UserEntity', useValue: User },
   ],
 })
-
-export class UserModule { }
+export class UserModule {}

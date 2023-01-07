@@ -36,6 +36,8 @@
     "@helper": "<rootDir>../src/helper",
     "@database(.*)": "<rootDir>src/database/$1",
     "@entity(.*)": "<rootDir>../src/database/entity/$1",
-    "@dto(.*)": "<rootDir>../src/types/$1"
+    "@dto(.*)": "<rootDir>../src/types/$1",
+    "@app/database/(.*)": "<rootDir>/../libs/database/src/$1",
+    "@app/database": "<rootDir>/../libs/database/src"
   }
 }

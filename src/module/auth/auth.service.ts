@@ -10,10 +10,11 @@ import { DateTime } from 'luxon';
 import { AuthDto } from 'src/types/auth.dto';
 import { UserService } from '../user/user.interface';
 import { LoginFrom } from 'src/types/oauth-types.enum';
-import { User } from 'src/database/entity/user.entity';
+
 import { Id } from 'src/types/id.dto';
 import { CacheService } from '@lib/cache';
 import { CacheKeyType } from '@lib/cache/dto/cache-types.enum';
+import { User } from '@app/database/entity/user.entity';
 
 dotenv.config();
 @Injectable()
@@ -38,31 +39,31 @@ export class AuthServiceImpl implements AuthService {
     return isNil(user)
       ? null
       : this._userService
-        .create({
-          email: user.email,
-          loginFrom: LoginFrom.GOOGLE,
-          name: `${user.firstName} ${user.lastName}`,
-        })
-        .then((register: User) => {
-          const now = DateTime.utc().toMillis();
-          return this.generateToken({ ...user, sub: register.id }, now)
-            .then((accessToken: string) => {
-              return this.generateRefreshToken(
-                now,
-                register.id,
-                register.email,
-              ).then((refreshToken: string) => {
-                return {
-                  accessToken,
-                  refreshToken,
-                };
+          .create({
+            email: user.email,
+            loginFrom: LoginFrom.GOOGLE,
+            name: `${user.firstName} ${user.lastName}`,
+          })
+          .then((register: User) => {
+            const now = DateTime.utc().toMillis();
+            return this.generateToken({ ...user, sub: register.id }, now)
+              .then((accessToken: string) => {
+                return this.generateRefreshToken(
+                  now,
+                  register.id,
+                  register.email,
+                ).then((refreshToken: string) => {
+                  return {
+                    accessToken,
+                    refreshToken,
+                  };
+                });
+              })
+              .catch((err) => {
+                this._logger.error(err);
+                throw new Error('UNAUTHORIZED');
               });
-            })
-            .catch((err) => {
-              this._logger.error(err);
-              throw new Error('UNAUTHORIZED');
-            });
-        });
+          });
   }
   refreshCredentials(userId: Id): Promise<string> {
     return this._userService.findByPK(userId).then((user: User) => {
@@ -123,7 +124,6 @@ export class AuthServiceImpl implements AuthService {
   // }
 
   logout(token: string): Promise<void> {
-
     const payload: any = this.jwtService.decode(token, { json: true });
 
     const ttl = Math.round(
@@ -131,7 +131,6 @@ export class AuthServiceImpl implements AuthService {
         Number(DateTime.fromMillis(payload.exp).diffNow()),
       ).toSeconds(),
     );
-
 
     return this._cacheService
       .remove(`${CacheKeyType.REFRESH_TOKEN}_${payload.sub}`)

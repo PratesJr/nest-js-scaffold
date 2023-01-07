@@ -53,6 +53,12 @@
       ],
       "@dto/*": [
         "src/types/*"
+      ],
+      "@app/database": [
+        "libs/database/src"
+      ],
+      "@app/database/*": [
+        "libs/database/src/*"
       ]
     }
   }

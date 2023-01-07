@@ -123,7 +123,8 @@
       "ˆ@helper(|/.*)$": "<rootDir>src/helper/$1",
       "ˆ@database(|/.*)$": "<rootDir>src/database/$1",
       "ˆ@entity(|/.*)$": "<rootDir>src/database/entity/$1",
-      "ˆ@dto(|/.*)$": "<rootDir>src/types/$1"
+      "ˆ@dto(|/.*)$": "<rootDir>src/types/$1",
+      "^@app/database(|/.*)$": "<rootDir>/libs/database/src/$1"
     }
   }
 }
