@@ -10,6 +10,21 @@
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
   },
+  "modulePathIgnorePatterns": [
+    "<rootDir>/../../dist/",
+    "<rootDir>/../../src/types",
+    "<rootDir>/../../src/database/"
+  ],
+  "coveragePathIgnorePatterns": [
+    "node_modules",
+    "test-config",
+    "types",
+    "database",
+    ".module.ts",
+    "<rootDir>/src/app/main.ts",
+    ".mock.ts",
+    "dto"
+  ],
   "moduleNameMapper": {
     "@lib/cache/(.*)": "<rootDir>/../libs/cache/src/$1",
     "@lib/cache": "<rootDir>/../libs/cache/src",
