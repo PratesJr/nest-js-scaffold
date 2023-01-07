@@ -11,21 +11,17 @@ import { CacheService } from '@lib/cache';
 import { CacheKeyType } from '@lib/cache/dto/cache-types.enum';
 @Injectable()
 export class RefreshTokenGuard extends AuthGuard('jwt-refresh') {
-
-
   constructor(
     // eslint-disable-next-line no-unused-vars
-    @Inject('RedisCacheService') private _cacheService: CacheService
+    @Inject('RedisCacheService') private _cacheService: CacheService,
   ) {
     super();
-
   }
   canActivate(context: ExecutionContext) {
     return super.canActivate(context);
   }
 
   handleRequest(err, user) {
-
     if (!user) {
       throw new UnauthorizedException('UNAUTHORIZED');
     }
@@ -48,7 +44,9 @@ export class RefreshTokenGuard extends AuthGuard('jwt-refresh') {
   }
 
   getCache(user): any {
-    const token = this._cacheService.get(`${CacheKeyType.DENY_LIST}_${user.sub}`);
+    const token = this._cacheService.get(
+      `${CacheKeyType.DENY_LIST}_${user.sub}`,
+    );
 
     return Promise.resolve(token).then((resolved) => {
       return resolved;

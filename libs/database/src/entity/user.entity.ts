@@ -1,4 +1,3 @@
-
 import {
   Table,
   Column,
@@ -51,8 +50,8 @@ export class User extends Model {
     get() {
       return this.getDataValue('createdAt')
         ? DateTime.fromSQL(this.getDataValue('createdAt'))
-          .setZone('America/Sao_Paulo')
-          .toFormat('YYYY-MM-DD HH:mm:ss')
+            .setZone('America/Sao_Paulo')
+            .toFormat('YYYY-MM-DD HH:mm:ss')
         : null;
     },
   })
@@ -64,8 +63,8 @@ export class User extends Model {
     get() {
       return this.getDataValue('createdAt')
         ? DateTime.fromSQL(this.getDataValue('createdAt'))
-          .setZone('America/Sao_Paulo')
-          .toFormat('YYYY-MM-DD HH:mm:ss')
+            .setZone('America/Sao_Paulo')
+            .toFormat('YYYY-MM-DD HH:mm:ss')
         : null;
     },
   })

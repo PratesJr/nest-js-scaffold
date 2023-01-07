@@ -5,21 +5,21 @@ export class QueryParams {
   @IsNumberString()
   @ApiProperty({
     required: false,
-    type: Number
+    type: Number,
   })
   limit?: string;
   @IsOptional()
   @IsNumberString()
   @ApiProperty({
     required: false,
-    type: Number
+    type: Number,
   })
   page?: string;
   @IsOptional()
   @IsNumberString()
   @ApiProperty({
     required: false,
-    type: Number
+    type: Number,
   })
   offset?: string;
 }

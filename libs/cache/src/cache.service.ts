@@ -3,7 +3,6 @@ import { CacheService } from './cache.interface';
 import { Cache } from 'cache-manager';
 import { CacheDto } from './dto/cache.dto';
 
-
 @Injectable()
 export class CacheServiceImpl implements CacheService {
   private _logger: Logger;

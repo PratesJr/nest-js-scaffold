@@ -18,7 +18,7 @@ import {
   ApiNoContentResponse,
   ApiBearerAuth,
   ApiUnauthorizedResponse,
-  ApiOkResponse
+  ApiOkResponse,
 } from '@nestjs/swagger';
 import { AuthDto } from 'src/types/auth.dto';
 @ApiTags('Authentication')
@@ -26,11 +26,12 @@ import { AuthDto } from 'src/types/auth.dto';
 //TODO: Be sure that the refresh token route is working well
 export class GoogleAuthController {
   // eslint-disable-next-line no-empty-function,  no-unused-vars
-  constructor(@Inject('AuthService') private _authService: AuthService) { }
+  constructor(@Inject('AuthService') private _authService: AuthService) {}
 
   @Get()
   @ApiOperation({
-    description: 'this route is a direction to auth with google gmail, you can copy the path and past on your browser'
+    description:
+      'this route is a direction to auth with google gmail, you can copy the path and past on your browser',
   })
   @UseGuards(GoogleOAuthGuard)
   auth(): void {
@@ -49,7 +50,7 @@ export class GoogleAuthController {
   @ApiBearerAuth()
   @UseGuards(RefreshTokenGuard)
   @ApiOkResponse({
-    type: AuthDto
+    type: AuthDto,
   })
   @ApiUnauthorizedResponse()
   refreshCredential(@Request() _req: any): Promise<AuthDto> {
@@ -62,7 +63,6 @@ export class GoogleAuthController {
         };
       });
   }
-
 
   @Get('logout')
   @ApiBearerAuth()

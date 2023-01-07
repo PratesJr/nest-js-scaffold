@@ -30,10 +30,7 @@ describe('RedisCacheService', () => {
 
     _cacheService = app.get<CacheService>('RedisCacheService');
     cache = app.get<any>(CACHE_MANAGER);
-
-
   });
-
 
   const mockSuccess = (signature: string) => {
     const methods = {
