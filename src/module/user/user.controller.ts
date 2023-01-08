@@ -12,9 +12,7 @@ import {
 } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/filter/http-exception.filter';
 import { JwtAuthGuard } from 'src/guard/jwt.guard';
-
 import { UserService } from './user.interface';
-
 import { isNil } from 'lodash';
 import {
   ApiTags,

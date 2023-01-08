@@ -1,11 +1,9 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { AuthService } from './auth.interface';
 import { isNil } from 'lodash';
 import { HttpService } from '@nestjs/axios';
 import * as dotenv from 'dotenv';
 import { JwtService } from '@nestjs/jwt';
 import { DateTime } from 'luxon';
-import { UserService } from '../user/user.interface';
 import { CacheService } from '@lib/cache';
 import { CacheKeyType } from '@lib/cache/dto/cache-types.enum';
 import { User } from '@app/database/entity/user.entity';
@@ -14,6 +12,8 @@ import { AuthDto } from '@dto/auth.dto';
 import { Id } from '@dto/id.dto';
 import { JwtPayload } from '@dto/jwt-payload.dto';
 import { LoginFrom } from '@dto/oauth-types.enum';
+import { UserService } from '@api-module/user/user.interface';
+import { AuthService } from './auth.interface';
 
 dotenv.config();
 @Injectable()
