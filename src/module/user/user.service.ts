@@ -1,10 +1,10 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { FindOptions } from 'sequelize/types';
-import { Id } from 'src/types/id.dto';
-import { UserDto } from 'src/types/user.dto';
 import { UserService } from './user.interface';
 import { isEmpty } from 'lodash';
 import { User } from '@app/database/entity/user.entity';
+import { Id } from '@dto/id.dto';
+import { UserDto } from '@dto/user.dto';
 
 @Injectable()
 export class UserServiceImpl implements UserService {

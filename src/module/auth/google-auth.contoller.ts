@@ -20,7 +20,8 @@ import {
   ApiUnauthorizedResponse,
   ApiOkResponse,
 } from '@nestjs/swagger';
-import { AuthDto } from 'src/types/auth.dto';
+import { AuthDto } from '@dto/auth.dto';
+
 @ApiTags('Authentication')
 @Controller('auth/google')
 //TODO: Be sure that the refresh token route is working well

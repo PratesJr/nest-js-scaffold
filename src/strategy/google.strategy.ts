@@ -3,7 +3,7 @@ import { Strategy, VerifyCallback, Profile } from 'passport-google-oauth20';
 
 import { Injectable } from '@nestjs/common';
 import * as dotenv from 'dotenv';
-import { UserInfoDto } from 'src/types/auth-user.dto';
+import { UserInfoDto } from '@dto/auth-user.dto';
 dotenv.config();
 
 @Injectable()

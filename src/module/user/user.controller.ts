@@ -12,8 +12,7 @@ import {
 } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/filter/http-exception.filter';
 import { JwtAuthGuard } from 'src/guard/jwt.guard';
-import { QueryMethods } from 'src/helper/query-methods';
-import { UserQuery } from 'src/types/user-query.dto';
+
 import { UserService } from './user.interface';
 
 import { isNil } from 'lodash';
@@ -27,6 +26,8 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { User } from '@app/database/entity/user.entity';
+import { QueryMethods } from '@helper/query-methods';
+import { UserQuery } from '@dto/user-query.dto';
 @ApiTags('User')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
