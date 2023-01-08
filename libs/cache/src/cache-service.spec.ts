@@ -2,9 +2,6 @@ import { CacheService, CacheServiceImpl } from '@lib/cache';
 import { CacheKeyType } from '@lib/cache/dto/cache-types.enum';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-
-import cacheManager from 'cache-manager';
-
 import { Cache } from 'cache-manager';
 import * as redisMock from 'redis-mock';
 
