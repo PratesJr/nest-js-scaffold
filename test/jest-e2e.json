@@ -1,5 +1,9 @@
 {
-  "moduleFileExtensions": ["js", "json", "ts"],
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
   "rootDir": ".",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
@@ -34,6 +38,7 @@
     "@entity(.*)": "<rootDir>../src/database/entity/$1",
     "@dto(.*)": "<rootDir>../src/types/$1",
     "@app/database/(.*)": "<rootDir>/../libs/database/src/$1",
-    "@app/database": "<rootDir>/../libs/database/src"
+    "@app/database": "<rootDir>/../libs/database/src",
+    "@app/mocks": "<rootDir>../src/mock/$1"
   }
 }

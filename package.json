@@ -124,7 +124,8 @@
       "ˆ@database(|/.*)$": "<rootDir>src/database/$1",
       "ˆ@entity(|/.*)$": "<rootDir>src/database/entity/$1",
       "ˆ@dto(|/.*)$": "<rootDir>src/types/$1",
-      "^@app/database(|/.*)$": "<rootDir>/libs/database/src/$1"
+      "^@app/database(|/.*)$": "<rootDir>/libs/database/src/$1",
+      "^@app/mocks(|/.*)$": "<rootDir>/src/mock/$1"
     }
   }
 }
