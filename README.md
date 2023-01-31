@@ -16,7 +16,8 @@ This Project is a NestJs TypeScript boilerplate for all my personal projects.
 
 ## Pending  Features
 
-- Jest tests coverage
+- Jest tests examples (examples of unit and e2e tests)
+- RabittMQ
 
 ## System Requirements
 
