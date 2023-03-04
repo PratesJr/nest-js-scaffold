@@ -3,6 +3,8 @@
 
 This Project is a NestJs TypeScript boilerplate for all my personal projects.
 
+THIS SKELETON WILL BE DEPRECATED, I`LL IMPLEMENT CLEAN ARCHITECTURE IN THE NEXT
+
 ## What is included
 
 - Lint Staged
