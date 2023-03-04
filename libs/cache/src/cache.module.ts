@@ -14,5 +14,4 @@ import { RedisInstance } from './redis-instance';
   providers: [{ provide: 'RedisCacheService', useClass: CacheServiceImpl }],
   exports: [{ provide: 'RedisCacheService', useClass: CacheServiceImpl }],
 })
-
-export class CacheLibModule { }
+export class CacheLibModule {}

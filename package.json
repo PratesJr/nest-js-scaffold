@@ -14,11 +14,11 @@
     "rod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
+    "test": "jest  --forceExit",
+    "test:watch": "jest --watch --forceExit",
+    "test:cov": "jest --coverage --forceExit",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "jest --config ./test/jest-e2e.json --forceExit",
     "prepare": "husky install",
     "db:migrate": "npx sequelize-cli db:migrate",
     "migration:create": "npx sequelize-cli migration:generate --name",
@@ -106,6 +106,16 @@
       "<rootDir>/src/",
       "<rootDir>/libs/"
     ],
+    "coveragePathIgnorePatterns": [
+      "node_modules",
+      "test-config",
+      "types",
+      "database",
+      ".module.ts",
+      "<rootDir>/src/app/main.ts",
+      ".mock.ts",
+      "dto"
+    ],
     "moduleNameMapper": {
       "^@lib/cache(|/.*)$": "<rootDir>/libs/cache/src/$1",
       "ˆ@api-module/auth(|/.*)$": "<rootDir>src/module/auth/$1",
@@ -113,7 +123,9 @@
       "ˆ@helper(|/.*)$": "<rootDir>src/helper/$1",
       "ˆ@database(|/.*)$": "<rootDir>src/database/$1",
       "ˆ@entity(|/.*)$": "<rootDir>src/database/entity/$1",
-      "ˆ@dto(|/.*)$": "<rootDir>src/types/$1"
+      "ˆ@dto(|/.*)$": "<rootDir>src/types/$1",
+      "^@app/database(|/.*)$": "<rootDir>/libs/database/src/$1",
+      "^@app/mocks(|/.*)$": "<rootDir>/src/mock/$1"
     }
   }
 }

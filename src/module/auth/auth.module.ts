@@ -29,9 +29,7 @@ dotenv.config();
     ConfigModule,
     PassportModule,
     UserModule,
-    CacheLibModule
-
-
+    CacheLibModule,
   ],
   controllers: [GoogleAuthController],
   providers: [
@@ -42,5 +40,4 @@ dotenv.config();
   ],
   exports: [],
 })
-
-export class AuthModule { }
+export class AuthModule {}

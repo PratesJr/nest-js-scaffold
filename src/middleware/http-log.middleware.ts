@@ -14,7 +14,8 @@ export class HttpLogMiddleware implements NestMiddleware {
       const { statusCode } = response;
       const now = Date.now();
       this.logger[errorCodes.includes(statusCode) ? 'error' : 'log'](
-        `${method} ${baseUrl} - statusCode: ${statusCode} - user-agent: ${userAgent} - after ${Date.now() - now
+        `${method} ${baseUrl} - statusCode: ${statusCode} - user-agent: ${userAgent} - after ${
+          Date.now() - now
         }ms`,
       );
     });

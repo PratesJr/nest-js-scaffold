@@ -7,21 +7,21 @@ export class UserQuery extends QueryParams {
   @IsEnum(LoginFrom)
   @ApiProperty({
     required: false,
-    type: LoginFrom
+    type: LoginFrom,
   })
   loginFrom?: LoginFrom;
   @IsOptional()
   @IsString()
   @ApiProperty({
     required: false,
-    type: String
+    type: String,
   })
   name?: string;
   @IsOptional()
   @IsString()
   @ApiProperty({
     required: false,
-    type: String
+    type: String,
   })
   email?: string;
 }

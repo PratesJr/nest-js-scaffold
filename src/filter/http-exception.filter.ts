@@ -17,7 +17,7 @@ import { isNil } from 'lodash';
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
   // eslint-disable-next-line no-unused-vars, no-empty-function
-  constructor(private readonly httpAdapterHost: HttpAdapterHost) { }
+  constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
   catch(exception: any, host: ArgumentsHost): void {
     const { httpAdapter } = this.httpAdapterHost;

@@ -12,11 +12,11 @@ import { CacheService } from '@lib/cache';
 import { CacheKeyType } from '@lib/cache/dto/cache-types.enum';
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
-
-  constructor( // eslint-disable-next-line no-unused-vars
-    @Inject('RedisCacheService') private _cacheService: CacheService) {
+  constructor(
+    // eslint-disable-next-line no-unused-vars
+    @Inject('RedisCacheService') private _cacheService: CacheService,
+  ) {
     super();
-
   }
   canActivate(context: ExecutionContext) {
     return super.canActivate(context);
@@ -44,11 +44,12 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
 
   getCache(user): any {
-    const token = this._cacheService.get(`${CacheKeyType.DENY_LIST}_${user.sub}`);
+    const token = this._cacheService.get(
+      `${CacheKeyType.DENY_LIST}_${user.sub}`,
+    );
 
     return Promise.resolve(token).then((resolved) => {
       return resolved;
     });
   }
-
 }

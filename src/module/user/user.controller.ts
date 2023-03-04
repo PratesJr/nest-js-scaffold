@@ -12,10 +12,7 @@ import {
 } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/filter/http-exception.filter';
 import { JwtAuthGuard } from 'src/guard/jwt.guard';
-import { QueryMethods } from 'src/helper/query-methods';
-import { UserQuery } from 'src/types/user-query.dto';
 import { UserService } from './user.interface';
-import { User } from 'src/database/entity/user.entity';
 import { isNil } from 'lodash';
 import {
   ApiTags,
@@ -24,8 +21,11 @@ import {
   ApiBadRequestResponse,
   ApiNotFoundResponse,
   ApiQuery,
-  ApiBearerAuth
+  ApiBearerAuth,
 } from '@nestjs/swagger';
+import { User } from '@app/database/entity/user.entity';
+import { QueryMethods } from '@helper/query-methods';
+import { UserQuery } from '@dto/user-query.dto';
 @ApiTags('User')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
@@ -37,13 +37,12 @@ export class UserController {
   private _logger = new Logger('USER_CONTROLLER');
   private readonly entity = 'User';
   // eslint-disable-next-line no-empty-function, no-unused-vars
-  constructor(@Inject('UserService') private _userService: UserService) { }
-
+  constructor(@Inject('UserService') private _userService: UserService) {}
 
   @Get()
   @ApiOkResponse({
     status: 200,
-    description: 'return a list of user'
+    description: 'return a list of user',
   })
   @ApiUnauthorizedResponse()
   @ApiBadRequestResponse()
@@ -69,7 +68,7 @@ export class UserController {
   @ApiQuery({
     name: 'id',
     type: String,
-    required: true
+    required: true,
   })
   getUserByPK(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
+import { User } from '@app/database/entity/user.entity';
+import { Id } from '@dto/id.dto';
+import { UserDto } from '@dto/user.dto';
 import { FindOptions } from 'sequelize';
-import { User } from 'src/database/entity/user.entity';
-import { Id } from 'src/types/id.dto';
-import { UserDto } from 'src/types/user.dto';
 
 export interface UserService {
   create(user: UserDto): Promise<User>;

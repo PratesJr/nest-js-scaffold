@@ -1,4 +1,3 @@
-
 import {
   Table,
   Column,
@@ -7,7 +6,8 @@ import {
   AfterCreate,
 } from 'sequelize-typescript';
 import { DateTime } from 'luxon';
-import { LoginFrom } from 'src/types/oauth-types.enum';
+import { LoginFrom } from '@dto/oauth-types.enum';
+
 @Table({
   modelName: 'user',
   tableName: 'user',
@@ -50,8 +50,8 @@ export class User extends Model {
     get() {
       return this.getDataValue('createdAt')
         ? DateTime.fromSQL(this.getDataValue('createdAt'))
-          .setZone('America/Sao_Paulo')
-          .toFormat('YYYY-MM-DD HH:mm:ss')
+            .setZone('America/Sao_Paulo')
+            .toFormat('YYYY-MM-DD HH:mm:ss')
         : null;
     },
   })
@@ -63,8 +63,8 @@ export class User extends Model {
     get() {
       return this.getDataValue('createdAt')
         ? DateTime.fromSQL(this.getDataValue('createdAt'))
-          .setZone('America/Sao_Paulo')
-          .toFormat('YYYY-MM-DD HH:mm:ss')
+            .setZone('America/Sao_Paulo')
+            .toFormat('YYYY-MM-DD HH:mm:ss')
         : null;
     },
   })

@@ -3,7 +3,6 @@ import { isNil } from 'lodash';
 
 //TODO create  method to validate common query params
 
-
 export class QueryMethods {
   private _mapper: Map<string, string[]>;
   constructor() {

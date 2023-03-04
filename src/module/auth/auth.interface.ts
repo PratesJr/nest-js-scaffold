@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { UserInfoDto } from 'src/types/auth-user.dto';
-import { AuthDto } from 'src/types/auth.dto';
-import { Id } from 'src/types/id.dto';
+
+import { UserInfoDto } from '@dto/auth-user.dto';
+import { AuthDto } from '@dto/auth.dto';
+import { Id } from '@dto/id.dto';
 
 export interface AuthService {
   generateToken(userInfo: UserInfoDto, now: number): Promise<string>;

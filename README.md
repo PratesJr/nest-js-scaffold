@@ -3,6 +3,8 @@
 
 This Project is a NestJs TypeScript boilerplate for all my personal projects.
 
+THIS SKELETON WILL BE DEPRECATED, I`LL IMPLEMENT CLEAN ARCHITECTURE IN THE NEXT
+
 ## What is included
 
 - Lint Staged
@@ -13,10 +15,12 @@ This Project is a NestJs TypeScript boilerplate for all my personal projects.
 - OAuth2 and Jwt Strategy
 - Caching with Redis
 - Swagger docs
+- examples of unit tests
 
 ## Pending  Features
 
-- Jest tests coverage
+- Jest tests examples (examples of e2e tests)
+- RabittMQ
 
 ## System Requirements
 
